@@ -1,0 +1,48 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: hw2/package-lock.json  # Specify the path to package-lock.json
+
+    - name: Change to Project Directory  # This is the new step
+      run: cd hw2
+
+    - name: Install Dependencies
+      run: npm install
+      working-directory: ./hw2  # Set the working directory for this step
+
+    - name: Build
+      run: npm run build
+      working-directory: ./hw2
+
+    - name: Run Unit Tests
+      run: npm run test
+      working-directory: ./hw2
+
+    - name: Generate Code Coverage Report
+      run: npx vitest run --coverage
+      working-directory: ./hw2
+
+    - name: Launch Application for Preview
+      run: npm run preview &
+      working-directory: ./hw2
+
+    - name: Execute End-to-End Tests
+      run: npx cypress run
+      working-directory: ./hw2
