@@ -36,7 +36,9 @@
     ]
   },
   "devDependencies": {
+    "@playwright/test": "^1.42.1",
     "@testing-library/react": "^14.2.2",
+    "@types/node": "^20.11.30",
     "jest": "^27.5.1",
     "react-test-renderer": "^18.2.0"
   }
