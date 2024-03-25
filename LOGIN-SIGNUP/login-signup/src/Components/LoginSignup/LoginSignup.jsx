@@ -36,7 +36,15 @@ export const LoginSignup = () => {
         e.preventDefault();
         const errors = validateForm();
         if (Object.keys(errors).length === 0) {
-            console.log('Form is valid!');
+            console.log('Submitting form data:', formData);
+            // Simulate form data submission
+            console.log(`Name: ${formData.name || 'N/A'}; Email: ${formData.email}; Password: ${formData.password}`);
+            
+            setFormData({
+                name: '',
+                email: '',
+                password: '',
+            });
         } else {
             console.log('Form has errors.');
             setFormErrors(errors);
@@ -53,10 +61,12 @@ export const LoginSignup = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="inputs">
-                    {action==="Login"?<div></div>:<div className="input">
-                        <img src={user_icon} alt="" />
-                        <input type="text" placeholder='Name' name="name" value={formData.name} onChange={handleChange}/>
-                    </div>}
+                    {action==="Login" ? null : (
+                        <div className="input">
+                            <img src={user_icon} alt="" />
+                            <input type="text" placeholder='Name' name="name" value={formData.name} onChange={handleChange}/>
+                        </div>
+                    )}
                     
                     <div className="input">
                         <img src={email_icon} alt="" />
@@ -68,7 +78,9 @@ export const LoginSignup = () => {
                         <input type="password" placeholder='Password' name="password" value={formData.password} onChange={handleChange}/>
                         {formErrors.password && <p className="error">{formErrors.password}</p>}
                     </div>
-                    {action==="Sign Up"?<div></div>:<div className="forgot-password">Forgot Password? <span>Click Here!</span></div>}
+                    {action==="Sign Up" ? null : (
+                        <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
+                    )}
                     <div className="submit-container">
                         <input type="submit" value="Submit" className="submit" />
                     </div>

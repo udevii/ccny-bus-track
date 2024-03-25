@@ -8,15 +8,12 @@ describe('LoginSignup Component', () => {
     test('Name input should not be present when action is set to Login', async () => {
         render(<LoginSignup />);
         
-        // the action is "Sign Up", so the "Name" input should be present.
         let nameInput = screen.queryByPlaceholderText('Name');
         expect(nameInput).toBeInTheDocument();
 
-        // Find the Login button and click it to change the action to "Login"
         const loginButton = screen.getByText('Login');
         fireEvent.click(loginButton);
 
-        // After setting action to "Login", the "Name" input should not be present.
         let nameInput2 = screen.queryByPlaceholderText('Name');
         expect(nameInput2).not.toBeInTheDocument();
     });
@@ -45,5 +42,49 @@ describe('LoginSignup Component', () => {
         fireEvent.click(screen.getByText('Login'));
         expect(screen.getByPlaceholderText('Email ID')).toBeInTheDocument();
         expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
+    });
+});
+
+describe('LoginSignup Form Submission', () => {
+    let consoleSpy;
+
+    beforeEach(() => {
+        consoleSpy = jest.spyOn(console, 'log');
+    });
+
+    afterEach(() => {
+        consoleSpy.mockRestore();
+    });
+
+    test('logs form data to console on successful submission', () => {
+        render(<LoginSignup />);
+        fireEvent.change(screen.getByPlaceholderText('Name'), { target: { value: 'Test Name' } });
+        fireEvent.change(screen.getByPlaceholderText('Email ID'), { target: { value: 'test@example.com' } });
+        fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'password123' } });
+        
+        fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+        
+        expect(consoleSpy).toHaveBeenCalledWith('Submitting form data:', {name: 'Test Name', email: 'test@example.com', password: 'password123'});
+    });
+
+    test('logs an error for invalid email format upon submission', () => {
+        render(<LoginSignup action="Sign Up"/>);
+        fireEvent.change(screen.getByPlaceholderText('Email ID'), { target: { value: 'invalid' } });
+        fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'password123' } });
+
+        fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+        expect(consoleSpy).toHaveBeenCalledWith('Form has errors.');
+    });
+
+    test('logs an error for password less than 8 characters upon submission', () => {
+        render(<LoginSignup action="Sign Up"/>);
+
+        fireEvent.change(screen.getByPlaceholderText('Email ID'), { target: { value: 'test@example.com' } });
+        fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'short' } });
+
+        fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+        expect(consoleSpy).toHaveBeenCalledWith('Form has errors.');
     });
 });
