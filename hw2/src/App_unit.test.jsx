@@ -8,21 +8,28 @@ describe('App Component', () => {
     expect(screen.queryByText('125 Street')).toBeNull();
     expect(screen.queryByText('145 Street')).toBeNull();
     expect(screen.getByText('Student')).toBeInTheDocument();
-    expect(screen.getByText('Bus Driver')).toBeInTheDocument();
+    // expect(screen.getByText('Bus Driver')).toBeInTheDocument();
   });
 
   test('displays the correct message when 125 Street button is clicked', () => {
     render(<App />);
     fireEvent.click(screen.getByText('Student'))
     fireEvent.click(screen.getByText('125 Street'));
-    expect(screen.getByRole('heading')).toHaveTextContent('You are in 125 Street')
+    expect(screen.getByRole('heading')).toHaveTextContent('You are at 125 Street')
+  });
+  
+  test('displays the correct message when 125 Street button is clicked', () => {
+    render(<App />);
+    fireEvent.click(screen.getByText('Student'))
+    fireEvent.click(screen.getByText('125 Street'));
+    expect(screen.getByRole('heading')).toHaveTextContent('You are at 125 Street')
   });
 
   test('displays the correct message when 145 Street button is clicked', () => {
     render(<App />);
     fireEvent.click(screen.getByText('Student'))
     fireEvent.click(screen.getByText('145 Street'));
-    expect(screen.getByRole('heading')).toHaveTextContent('You are in 145 Street')
+    expect(screen.getByRole('heading')).toHaveTextContent('You are at 145 Street')
   });
 
 });

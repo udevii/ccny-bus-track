@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import Register from './Register'
-import './Login.css'
+import './Register.css'
 
-function Login({setIsLoggedIn}) {
+function Login({testing, setTesting}) {
     const [studentId, setStudentId] = useState('')
     const [studentPassword, setStudentPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
-    const [testing, setTesting] = useState(true)
 
     const handleIdInput = (e) => {
       setStudentId(e.target.value)
@@ -16,11 +16,15 @@ function Login({setIsLoggedIn}) {
     const handlePasswordInput = (e) => {
       setStudentPassword(e.target.value)
     }
+    
+    const handleConfirmPasswordInput = (e) => {
+      setConfirmPassword(e.target.value)
+    }
 
     const handleSubmit = (e) => {
       e.preventDefault();
       if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-        setIsLoggedIn(true)
+        setTesting(true)
       }
       else {
         setError("Incorrect username and/or password")
@@ -28,28 +32,27 @@ function Login({setIsLoggedIn}) {
     }
 
     const handleRegisterClick = () => {
-      setTesting(false)
+      setTesting(true)
       alert("Successful")
     };
 
 
     return (
       <>
-      {testing ? (
+      {!testing ? (
           <>
             <div className="login-container">
               <h2>
-                Login or
-                {' '}
-                  <span
-                    role="button"
-                    onClick={handleRegisterClick}
-                    style={{ color: 'blue', cursor: 'pointer' }}
-                    onKeyDown={handleRegisterClick}
-                    tabIndex={0} // Make it focusable
-                  >
-                    Register
-                  </span>
+                <span
+                  role="button"
+                  onClick={handleRegisterClick}
+                  style={{ color: 'blue', cursor: 'pointer' }}
+                  onKeyDown={handleRegisterClick}
+                  tabIndex={0} // Make it focusable
+                >
+                  Login
+                </span>
+                {' or Register'}
               </h2>
               <form className="login-form" onSubmit={handleSubmit}>
                 <div className="input-group">
@@ -61,14 +64,18 @@ function Login({setIsLoggedIn}) {
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" value={studentPassword} onChange={handlePasswordInput} />
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="confirm-password">Confirm Password</label>
+                    <input type="confirm-password" id="confirm-password" name="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordInput} />
+                  </div>
                 </div>
                 {error && <div className="error-message">{error}</div>}
-                <button type="submit">Log in</button> {/* Removed onClick here, using form's onSubmit instead */}
+                <button type="submit">Register</button> {/* Removed onClick here, using form's onSubmit instead */}
               </form>
             </div>
           </>
         ) : (
-          <Register testing = {testing} setTesting={setTesting}></Register>
+          <Register></Register>
         )
       }
     </>
