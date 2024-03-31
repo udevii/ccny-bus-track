@@ -1,16 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
-import Register from './Register'
-import './Register.css'
+import styles from './Register.module.css';
 
-function Login({testing, setTesting}) {
+function Register({testing, setTesting}) {
     const [studentId, setStudentId] = useState('')
+    const [studentEmail, setStudentEmail] = useState('')
     const [studentPassword, setStudentPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [error, setError] = useState('')
 
     const handleIdInput = (e) => {
       setStudentId(e.target.value)
+    }
+
+    const handleEmailInput = (e) => {
+      setStudentEmail(e.target.value)
     }
 
     const handlePasswordInput = (e) => {
@@ -27,21 +31,30 @@ function Login({testing, setTesting}) {
         setTesting(true)
       }
       else {
-        setError("Incorrect username and/or password")
+        setError("Invalid account information")
       }
     }
 
     const handleRegisterClick = () => {
       setTesting(true)
-      alert("Successful")
     };
 
 
     return (
+      // <>
+      //   {testing === false && (
+      //   <>
+      //     <h1>Welcome back!</h1>
+      //     <p>fogjod</p>
+      //   </>
+      //   )}
+      // </>
+
+
       <>
-      {!testing ? (
+        {!testing ? (
           <>
-            <div className="login-container">
+            <div className={styles.loginContainer}>
               <h2>
                 <span
                   role="button"
@@ -54,23 +67,27 @@ function Login({testing, setTesting}) {
                 </span>
                 {' or Register'}
               </h2>
-              <form className="login-form" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <div className="form-group">
+              <form className={styles.loginForm} onSubmit={handleSubmit}>
+                <div className={styles.inputGroup}>
+                  <div className={styles.formGroup}>
                     <label htmlFor="username">Username</label>
                     <input type="text" id="username" name="username" value={studentId} onChange={handleIdInput} />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" value={studentPassword} onChange={handlePasswordInput} />
+                  <div className={styles.formGroup}>
+                    <label htmlFor="email">Email</label>
+                    <input type="text" id="email" name="email" value={studentEmail} onChange={handleEmailInput} />
                   </div>
-                  <div className="form-group">
+                  <div className={styles.formGroup}>
+                    <label htmlFor="password">Password</label>
+                    <input type="text" id="password" name="password" value={studentPassword} onChange={handlePasswordInput} />
+                  </div>
+                  <div className={styles.formGroup}>
                     <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="confirm-password" id="confirm-password" name="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordInput} />
+                    <input type="text" id="confirm-password" name="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordInput} />
                   </div>
                 </div>
-                {error && <div className="error-message">{error}</div>}
-                <button type="submit">Register</button> {/* Removed onClick here, using form's onSubmit instead */}
+                {error && <div className={styles.errorMessage}>{error}</div>}
+                <button type="submit">Register</button>
               </form>
             </div>
           </>
@@ -78,8 +95,8 @@ function Login({testing, setTesting}) {
           <Register></Register>
         )
       }
-    </>
+      </>
     )
 }
 
-export default Login
+export default Register
