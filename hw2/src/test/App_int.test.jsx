@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { render, waitFor, fireEvent, screen } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 import { Coords125, CoordsCCNY, Coords145 } from './Coordinates'; // Adjust the path as needed
 
 describe('App Component', () => {

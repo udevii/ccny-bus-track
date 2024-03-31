@@ -2,33 +2,56 @@ import React from 'react';
 import { useState } from 'react';
 import Register from './Register'
 import './Register.css'
+import { supabase } from '../../../server/client';
 
-function Login({testing, setTesting}) {
-    const [studentId, setStudentId] = useState('')
-    const [studentPassword, setStudentPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+function RegisterPage({testing, setTesting}) {
+    const [formData, setFormData] = useState({
+      username:'',
+      email:'',
+      password:''
+    })
     const [error, setError] = useState('')
 
-    const handleIdInput = (e) => {
-      setStudentId(e.target.value)
+    console.log(formData)
+
+    function handleChange(e) {
+      setFormData((prevFormData) => {
+        return{
+          ...prevFormData,
+          [e.target.name]:e.target.value
+        }
+      })
     }
 
-    const handlePasswordInput = (e) => {
-      setStudentPassword(e.target.value)
-    }
     
-    const handleConfirmPasswordInput = (e) => {
-      setConfirmPassword(e.target.value)
-    }
+  
 
-    const handleSubmit = (e) => {
+    async function handleSubmit(e){
       e.preventDefault();
-      if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-        setTesting(true)
-      }
-      else {
-        setError("Incorrect username and/or password")
-      }
+      // if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
+      //   setTesting(true)
+      // }
+      // else {
+      //   setError("Incorrect username and/or password")
+      // }
+
+      console.log(formData)
+     try {
+      const { data, error } = await supabase.auth.signUp(
+        {
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              first_name: formData.username,handleChange
+            }
+          }
+        }
+      )
+      alert("Check your email for verification Link")
+     } catch (error) {
+      alert(error)
+     }
     }
 
     const handleRegisterClick = () => {
@@ -58,15 +81,15 @@ function Login({testing, setTesting}) {
                 <div className="input-group">
                   <div className="form-group">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" name="username" value={studentId} onChange={handleIdInput} />
+                    <input type="text" id="username" name="username" onChange={handleChange} />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" id="password" name="password" value={studentPassword} onChange={handlePasswordInput} />
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" name="email" onChange={handleChange} />
                   </div>
                   <div className="form-group">
                     <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="confirm-password" id="confirm-password" name="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordInput} />
+                    <input type="password" id="password" name="password" onChange={handleChange} />
                   </div>
                 </div>
                 {error && <div className="error-message">{error}</div>}
@@ -82,4 +105,4 @@ function Login({testing, setTesting}) {
     )
 }
 
-export default Login
+export default RegisterPage

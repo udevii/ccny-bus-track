@@ -1,6 +1,6 @@
 // Contents of App.unit.test.jsx
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App'; // Adjust the path as needed
+import App from '../App'; // Adjust the path as needed
 
 describe('App Component', () => {
   test('initially hides borough buttons and displays only the log in button', () => {
