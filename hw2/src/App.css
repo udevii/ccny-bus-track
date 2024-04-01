@@ -35,13 +35,29 @@
   flex-direction: row; /* Aligns children horizontally */
   align-items: center; /* Centers children vertically */
   gap: 20px; /* Adds some space between the image and the h3 tag */
-  /* Additional styling as needed */
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .Street125Container img {
-  width: 275px; /* Adjust this value to your desired width */
-  height: auto; /* This maintains the aspect ratio */
+  width: 230px;
+  height: auto;
   /* You can also use 'max-width' instead of 'width' if you want the image to be responsive */
+}
+
+.Street125Container h3 {
+  color: #000000;
+  font-style: italic;
+}
+
+.input-container button {
+  background-color: #900c8e;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 

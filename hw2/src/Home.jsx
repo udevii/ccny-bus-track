@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Coords125, CoordsCCNY, Coords145 } from './Coordinates';
 import './App.css';
 import Street125 from './Street125';
+import Street145 from './Street145';
 
 function Home() {
   const [currPage, setCurrPage] = useState('Home')
@@ -44,13 +45,13 @@ function Home() {
         )}
         {currPage === '125' &&(
             <>
-                {/* <h1>{selectedStop}</h1> */}
                 <Street125></Street125>
             </>
         )}
          {currPage === '145' &&(
             <>
-                <h1>{selectedStop}</h1>
+                {/* <h1>{selectedStop}</h1> */}
+                <Street145></Street145>
             </>
         )}
          {currPage === 'CCNY' &&(
