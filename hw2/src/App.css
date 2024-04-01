@@ -54,6 +54,31 @@
   font-style: italic;
 }
 
+.CcnyContainer {
+  display: flex;
+  flex-direction: row; /* Aligns the street information side by side */
+  gap: 40px; /* Adds space between the street information blocks */
+  align-items: center; /* Aligns items vertically in the center */
+}
+
+
+
+.streetInfo h2{
+  padding-top: 50px;
+  text-align: center; /* Centers the text within each streetInfo block */
+  font-size: 75px;
+  padding-left: 30px;
+  padding-right: 30px;
+  align-items: center;
+}
+
+.streetInfo p {
+  text-align: center;
+  color:#900c8e;
+  font-size: 25px;
+  font-style: italic;
+}
+
 .input-container button {
   background-color: #900c8e;
   border-radius: 20px;

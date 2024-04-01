@@ -3,6 +3,7 @@ import { Coords125, CoordsCCNY, Coords145 } from './Coordinates';
 import './App.css';
 import Street125 from './Street125';
 import Street145 from './Street145';
+import Ccny from './Ccny';
 
 function Home() {
   const [currPage, setCurrPage] = useState('Home')
@@ -17,9 +18,9 @@ function Home() {
       setCoordinates(`Latitude: ${Coords145.lat}, Longitude: ${Coords145.lng}`)
       setCurrPage('145')
     }
-    else {
+    else if (busStop === 'CCNY') {
       setCoordinates(`Latitude: ${CoordsCCNY.lat}, Longitude: ${CoordsCCNY.lng}`)
-      setCurrPage('CCNY')
+      setCurrPage('Ccny')
     }
     setSelectedStop(busStop)
   };
@@ -50,13 +51,13 @@ function Home() {
         )}
          {currPage === '145' &&(
             <>
-                {/* <h1>{selectedStop}</h1> */}
                 <Street145></Street145>
             </>
         )}
-         {currPage === 'CCNY' &&(
+         {currPage === 'Ccny' &&(
             <>
-                <h1>{selectedStop}</h1>
+                {/* <h1>{selectedStop}</h1> */}
+                <Ccny></Ccny>
             </>
         )}
     </>
