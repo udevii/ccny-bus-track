@@ -17,22 +17,22 @@ body {
   justify-content: space-around;
   width: 100vw;
   background: #7e57c6;
-  padding: 10px 0;  /* Reduced padding */
-  border-radius: 15px;  /* Reduced border-radius */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);  /* Reduced box-shadow */
+  padding: 10px 0;  
+  border-radius: 15px;  
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);  
 }
 
 .nav-links li {
   list-style: none;
-  margin: 0 8px;  /* Reduced margin */
+  margin: 0 8px;  
 }
 
 .nav-links li a {
   position: relative;
   color: #ffffff;
-  font-size: 18px;  /* Reduced font-size */
+  font-size: 18px;  
   font-weight: 500;
-  padding: 4px 12px;  /* Reduced padding */
+  padding: 4px 12px;  
   text-decoration: none;
 }
 
@@ -41,10 +41,10 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 2px;  /* Reduced height */
+  height: 2px;  
   width: 0%;
   background: #ffffff;
-  border-radius: 10px;  /* Reduced border-radius */
+  border-radius: 10px;  
   transition: all 0.4s ease;
 }
 
@@ -81,6 +81,6 @@ body {
 }
 
 .nav-links li.logo img {
-    width: 180px;  /* Reduced logo width */
+    width: 180px;  
     height: auto;
 }
