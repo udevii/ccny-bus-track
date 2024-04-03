@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import Register from './Register'
-import './Login.css'
+import styles from './Login.module.css';
 
 function Login({setIsLoggedIn}) {
     const [studentId, setStudentId] = useState('')
@@ -29,7 +29,6 @@ function Login({setIsLoggedIn}) {
 
     const handleRegisterClick = () => {
       setTesting(false)
-      alert("Successful")
     };
 
 
@@ -37,7 +36,7 @@ function Login({setIsLoggedIn}) {
       <>
       {testing ? (
           <>
-            <div className="login-container">
+            <div className={styles.loginContainer}>
               <h2>
                 Login or
                 {' '}
@@ -51,19 +50,19 @@ function Login({setIsLoggedIn}) {
                     Register
                   </span>
               </h2>
-              <form className="login-form" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <div className="form-group">
+              <form className={styles.loginForm} onSubmit={handleSubmit}>
+                <div className={styles.inputGroup}>
+                  <div className={styles.formGroup}>
                     <label htmlFor="username">Username</label>
                     <input type="text" id="username" name="username" value={studentId} onChange={handleIdInput} />
                   </div>
-                  <div className="form-group">
+                  <div className={styles.formGroup}>
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" value={studentPassword} onChange={handlePasswordInput} />
                   </div>
                 </div>
-                {error && <div className="error-message">{error}</div>}
-                <button type="submit">Log in</button> {/* Removed onClick here, using form's onSubmit instead */}
+                {error && <div className={styles.errorMessage}>{error}</div>}
+                <button type="submit">Log in</button>
               </form>
             </div>
           </>

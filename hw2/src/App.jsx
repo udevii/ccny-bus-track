@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Coords125, CoordsCCNY, Coords145 } from './Coordinates';
 import Login from './Login';
 import './App.css';
-import Register from './Register';
+import Home from './Home';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -26,20 +26,7 @@ function App() {
   return (
     <>
       {isLoggedIn ? (
-          <>
-            <div className="App">
-              <div className='input-container'>
-                <h2>Please select what location you are at</h2>
-                <div className='button-container'>
-                  <button onClick={() => handleClick('125 Street')}>125 Street</button>
-                  <button onClick={() => handleClick('CCNY')}>CCNY</button>
-                  <button onClick={() => handleClick('145 Street')}>145 Street</button>
-                </div>
-                {selectedStop && <h1>You are at {selectedStop}</h1>}
-              </div>
-              <div data-testid="coordinates">{coordinates}</div>
-            </div>
-          </>
+          <Home></Home>
         ) : (
           <Login setIsLoggedIn={setIsLoggedIn}/>
         )
