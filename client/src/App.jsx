@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage'
 import Ccny from './pages/CCNY'
 import Street125 from './pages/Street125'
 import Street145 from './pages/Street145'
-import navbar from './components/Navbar'
+import navbar from './components/navbar'
 
 const App = () => {
   return (
