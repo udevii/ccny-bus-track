@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Register from './Register'
+// import Register from './Register'
 import './Register.css'
 import { supabase } from '../../../server/client';
 
@@ -63,7 +63,7 @@ function RegisterPage({testing, setTesting}) {
       <>
       {!testing ? (
           <>
-            <div className="login-container">
+            <div className="loginContainer">
               <h2>
                 <span
                   role="button"
@@ -76,22 +76,26 @@ function RegisterPage({testing, setTesting}) {
                 </span>
                 {' or Register'}
               </h2>
-              <form className="login-form" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <div className="form-group">
+              <form className="loginForm" onSubmit={handleSubmit}>
+                <div className="inputGroup">
+                <div className="formGroup">
                     <label htmlFor="username">Username</label>
                     <input type="text" id="username" name="username" onChange={handleChange} />
                   </div>
-                  <div className="form-group">
+                  <div className="formGroup">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" onChange={handleChange} />
+                    <input type="text" id="email" name="email" onChange={handleChange} />
                   </div>
-                  <div className="form-group">
+                  <div className="formGroup">
+                    <label htmlFor="password">Password</label>
+                    <input type="text" id="password" name="password" onChange={handleChange} />
+                  </div>
+                  <div className="formGroup">
                     <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="password" id="password" name="password" onChange={handleChange} />
+                    <input type="text" id="confirm-password" name="confirm-password" onChange={handleChange} />
                   </div>
                 </div>
-                {error && <div className="error-message">{error}</div>}
+                {error && <div className="errorMessage">{error}</div>}
                 <button type="submit">Register</button> {/* Removed onClick here, using form's onSubmit instead */}
               </form>
             </div>

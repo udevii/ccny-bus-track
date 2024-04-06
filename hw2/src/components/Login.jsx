@@ -63,7 +63,7 @@ function Login({setIsLoggedIn}) {
       <>
       {testing ? (
           <>
-            <div className="login-container">
+            <div className="loginContainer">
               <h2>
                 Login or
                 {' '}
@@ -77,19 +77,19 @@ function Login({setIsLoggedIn}) {
                     Register
                   </span>
               </h2>
-              <form className="login-form" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <div className="form-group">
+              <form className="loginForm" onSubmit={handleSubmit}>
+                <div className="inputGroup">
+                  <div className="formGroup">
                     <label htmlFor="username">Email</label>
                     <input type="text" id="email" name="email" onChange={handleChange} />
                   </div>
-                  <div className="form-group">
+                  <div className="formGroup">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" onChange={handleChange} />
                   </div>
                 </div>
-                {error && <div className="error-message">{error}</div>}
-                <button type="submit">Log in</button> {/* Removed onClick here, using form's onSubmit instead */}
+                {error && <div className="errorMessage">{error}</div>}
+                <button type="submit">Log in</button>
               </form>
             </div>
           </>
