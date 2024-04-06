@@ -56,7 +56,6 @@ function Login({setIsLoggedIn}) {
 
     const handleRegisterClick = () => {
       setTesting(false)
-      alert("Successful")
     };
 
 

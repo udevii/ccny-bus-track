@@ -56,7 +56,6 @@ function RegisterPage({testing, setTesting}) {
 
     const handleRegisterClick = () => {
       setTesting(true)
-      alert("Successful")
     };
 
 
