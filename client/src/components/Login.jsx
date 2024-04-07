@@ -5,7 +5,8 @@ import './Login.css'
 import { supabase } from '../../../server/client';
 import { useNavigate } from 'react-router-dom';
 
-function Login({setIsLoggedIn}) {
+
+function Login( {setToken} ) {
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
       email:'',
@@ -24,33 +25,23 @@ function Login({setIsLoggedIn}) {
         }
       })
     }
-
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-    //     setIsLoggedIn(true)
-    //   }
-    //   else {
-    //     setError("Incorrect username and/or password")
-    //   }
-    // }
   
     async function handleSubmit(e){
       e.preventDefault();
-      // if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-      //   setTesting(true)
-      // }
-      // else {
-      //   setError("Incorrect username and/or password")
-      // }
-
-      console.log(formData)
+      // console.log(formData)
      try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       })
-      alert("Check your email for verification Link")
+
+
+      if (error) throw error
+      console.log(data)
+      {setToken(data)}
+      navigate('/home')
+
+
      } catch (error) {
       alert(error)
      }
@@ -103,5 +94,6 @@ function Login({setIsLoggedIn}) {
     </>
     )
 }
+
 
 export default Login

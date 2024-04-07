@@ -6,7 +6,7 @@ import { supabase } from '../../../server/client';
 import { useNavigate } from 'react-router-dom';
 
 function Register({testing, setTesting}) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
       username:'',
       email:'',
@@ -29,14 +29,7 @@ function Register({testing, setTesting}) {
   
 
     async function handleSubmit(e){
-      e.preventDefault();
-      // if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-      //   setTesting(true)
-      // }
-      // else {
-      //   setError("Incorrect username and/or password")
-      // }
-
+      e.preventDefault(); 
       console.log(formData)
      try {
       const { data, error } = await supabase.auth.signUp(
@@ -45,7 +38,7 @@ function Register({testing, setTesting}) {
           password: formData.password,
           options: {
             data: {
-              first_name: formData.username,handleChange
+              first_name: formData.username
             }
           }
         }
@@ -88,11 +81,11 @@ function Register({testing, setTesting}) {
                   </div>
                   <div className="formGroupR">
                     <label htmlFor="password">Password</label>
-                    <input type="text" id="password" name="password" onChange={handleChange} />
+                    <input type="password" id="password" name="password" onChange={handleChange} />
                   </div>
                   <div className="formGroupR">
                     <label htmlFor="confirm-password">Confirm Password</label>
-                    <input type="text" id="confirm-password" name="confirm-password" onChange={handleChange} />
+                    <input type="password" id="confirm-password" name="confirm-password" onChange={handleChange} />
                   </div>
                 </div>
                 {error && <div className="errorMessage">{error}</div>}
