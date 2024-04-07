@@ -29,8 +29,8 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
-      
-        {token?<Route path='/' element={<LoginPage setToken={setToken}/>}/> : navigate('/login')}
+        <Route path='/login' element={<Login setToken={setToken}/>}/>
+        {token?<Route path='/' element={<LoginPage setToken={setToken}/>}/> : <Route path='/' element={<Login setToken={setToken}/>}/> }
         <Route path='/login' element={<Login setToken={setToken}/>}/>
         <Route path='/signup' element={<RegisterPage/>} />
         {token?<Route path='/home' element={<HomePage />}/>:""}
