@@ -3,8 +3,10 @@ import { useState } from 'react';
 import Register from '../pages/Register'
 import './Login.css'
 import { supabase } from '../../../server/client';
+import { useNavigate } from 'react-router-dom';
 
 function Login({setIsLoggedIn}) {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
       email:'',
       password:''
@@ -56,6 +58,7 @@ function Login({setIsLoggedIn}) {
 
     const handleRegisterClick = () => {
       setTesting(false)
+      navigate('/signup')
     };
 
 
@@ -70,7 +73,7 @@ function Login({setIsLoggedIn}) {
                   <span
                     role="button"
                     onClick={handleRegisterClick}
-                    style={{ color: 'blue', cursor: 'pointer' }}
+                    style={{ color: 'purple', cursor: 'pointer', textDecoration: 'underline' }}
                     onKeyDown={handleRegisterClick}
                     tabIndex={0} // Make it focusable
                   >
