@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 // import { Coords125, CoordsCCNY, Coords145 } from './Coordinates';
 // import './Street145.module.css';
 import './Street.css'
+import { useNavigate } from 'react-router-dom';
 
 function Street145() {
+  const navigate = useNavigate();
   const [currPage, setCurrPage] = useState('125')
 
   const handleHomeClick = () => {
     setCurrPage('Home')
+    navigate('/Home')
   }
 
   return (

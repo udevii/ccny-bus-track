@@ -4,8 +4,10 @@ import './Street.css'
 import Street125 from './Street125';
 import Street145 from './Street145';
 import Ccny from './CCNY';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
+  const navigate = useNavigate()
   const [currPage, setCurrPage] = useState('Home')
   const [coordinates, setCoordinates] = useState('')
   const [selectedStop, setSelectedStop] = useState('')
@@ -14,13 +16,16 @@ function HomePage() {
     if (busStop === '125 Street') {
       // setCoordinates(`Latitude: ${Coords125.lat}, Longitude: ${Coords125.lng}`)
       setCurrPage('125')
+      navigate('/Street125')
     } else if (busStop === '145 Street') {
       // setCoordinates(`Latitude: ${Coords145.lat}, Longitude: ${Coords145.lng}`)
       setCurrPage('145')
+      navigate('/Street145')
     }
     else if (busStop === 'CCNY') {
       // setCoordinates(`Latitude: ${CoordsCCNY.lat}, Longitude: ${CoordsCCNY.lng}`)
       setCurrPage('Ccny')
+      navigate('/CCNY')
     }
     setSelectedStop(busStop)
   };
