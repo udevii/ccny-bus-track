@@ -1,4 +1,4 @@
-#root {
+/* #root {
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
@@ -17,7 +17,6 @@
     padding: 40px; 
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
     align-items: center;
     background-color: #e0dfdf;
     border-radius: 10px;
@@ -63,4 +62,4 @@
     margin-top: 20px;
     font-style: italic;
   }
-
+ */

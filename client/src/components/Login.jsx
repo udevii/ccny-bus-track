@@ -3,8 +3,11 @@ import { useState } from 'react';
 import Register from '../pages/Register'
 import './Login.css'
 import { supabase } from '../../../server/client';
+import { useNavigate } from 'react-router-dom';
 
-function Login({setIsLoggedIn}) {
+
+function Login( {setToken} ) {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
       email:'',
       password:''
@@ -22,33 +25,23 @@ function Login({setIsLoggedIn}) {
         }
       })
     }
-
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-    //     setIsLoggedIn(true)
-    //   }
-    //   else {
-    //     setError("Incorrect username and/or password")
-    //   }
-    // }
   
     async function handleSubmit(e){
       e.preventDefault();
-      // if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-      //   setTesting(true)
-      // }
-      // else {
-      //   setError("Incorrect username and/or password")
-      // }
-
-      console.log(formData)
+      // console.log(formData)
      try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
       })
-      alert("Check your email for verification Link")
+
+
+      if (error) throw error
+      console.log(data)
+      {setToken(data)}
+      navigate('/home')
+
+
      } catch (error) {
       alert(error)
      }
@@ -56,7 +49,7 @@ function Login({setIsLoggedIn}) {
 
     const handleRegisterClick = () => {
       setTesting(false)
-      alert("Successful")
+      navigate('/signup')
     };
 
 
@@ -64,33 +57,33 @@ function Login({setIsLoggedIn}) {
       <>
       {testing ? (
           <>
-            <div className="login-container">
+            <div className="loginContainer">
               <h2>
                 Login or
                 {' '}
                   <span
                     role="button"
                     onClick={handleRegisterClick}
-                    style={{ color: 'blue', cursor: 'pointer' }}
+                    style={{ color: 'purple', cursor: 'pointer', textDecoration: 'underline' }}
                     onKeyDown={handleRegisterClick}
                     tabIndex={0} // Make it focusable
                   >
                     Register
                   </span>
               </h2>
-              <form className="login-form" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <div className="form-group">
+              <form className="loginForm" onSubmit={handleSubmit}>
+                <div className="inputGroup">
+                  <div className="formGroup">
                     <label htmlFor="username">Email</label>
                     <input type="text" id="email" name="email" onChange={handleChange} />
                   </div>
-                  <div className="form-group">
+                  <div className="formGroup">
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" onChange={handleChange} />
                   </div>
                 </div>
-                {error && <div className="error-message">{error}</div>}
-                <button type="submit">Log in</button> {/* Removed onClick here, using form's onSubmit instead */}
+                {error && <div className="errorMessage">{error}</div>}
+                <button type="submit">Log in</button>
               </form>
             </div>
           </>
@@ -101,5 +94,6 @@ function Login({setIsLoggedIn}) {
     </>
     )
 }
+
 
 export default Login

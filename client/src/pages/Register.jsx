@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import Register from './Register'
+// import Register from './Register'
 import './Register.css'
 import { supabase } from '../../../server/client';
+import { useNavigate } from 'react-router-dom';
 
-function RegisterPage({testing, setTesting}) {
+function Register({testing, setTesting}) {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
       username:'',
       email:'',
@@ -27,14 +29,7 @@ function RegisterPage({testing, setTesting}) {
   
 
     async function handleSubmit(e){
-      e.preventDefault();
-      // if (/^\d+$/.test(studentId) && studentId.length === 8 && studentPassword.length >=8){
-      //   setTesting(true)
-      // }
-      // else {
-      //   setError("Incorrect username and/or password")
-      // }
-
+      e.preventDefault(); 
       console.log(formData)
      try {
       const { data, error } = await supabase.auth.signUp(
@@ -43,7 +38,7 @@ function RegisterPage({testing, setTesting}) {
           password: formData.password,
           options: {
             data: {
-              first_name: formData.username,handleChange
+              first_name: formData.username
             }
           }
         }
@@ -55,21 +50,18 @@ function RegisterPage({testing, setTesting}) {
     }
 
     const handleRegisterClick = () => {
-      setTesting(true)
-      alert("Successful")
+      navigate('/')
     };
 
 
     return (
-      <>
-      {!testing ? (
           <>
-            <div className="login-container">
+            <div className="loginContainerR">
               <h2>
                 <span
                   role="button"
                   onClick={handleRegisterClick}
-                  style={{ color: 'blue', cursor: 'pointer' }}
+                  style={{ color: 'purple', cursor: 'pointer', textDecoration: 'underline' }}
                   onKeyDown={handleRegisterClick}
                   tabIndex={0} // Make it focusable
                 >
@@ -77,32 +69,31 @@ function RegisterPage({testing, setTesting}) {
                 </span>
                 {' or Register'}
               </h2>
-              <form className="login-form" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <div className="form-group">
+              <form className="loginFormR" onSubmit={handleSubmit}>
+                <div className="inputGroupR">
+                <div className="formGroupR">
                     <label htmlFor="username">Username</label>
                     <input type="text" id="username" name="username" onChange={handleChange} />
                   </div>
-                  <div className="form-group">
+                  <div className="formGroupR">
                     <label htmlFor="email">Email</label>
-                    <input type="email" id="email" name="email" onChange={handleChange} />
+                    <input type="text" id="email" name="email" onChange={handleChange} />
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="confirm-password">Confirm Password</label>
+                  <div className="formGroupR">
+                    <label htmlFor="password">Password</label>
                     <input type="password" id="password" name="password" onChange={handleChange} />
                   </div>
+                  <div className="formGroupR">
+                    <label htmlFor="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" onChange={handleChange} />
+                  </div>
                 </div>
-                {error && <div className="error-message">{error}</div>}
+                {error && <div className="errorMessage">{error}</div>}
                 <button type="submit">Register</button> {/* Removed onClick here, using form's onSubmit instead */}
               </form>
             </div>
           </>
-        ) : (
-          <Register></Register>
-        )
-      }
-    </>
     )
 }
 
-export default RegisterPage
+export default Register
