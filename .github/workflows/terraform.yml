@@ -1,0 +1,38 @@
+name: 'Terraform'
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.TERRAFORM_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.TERRAFORM_AWS_SECRET_ACCESS_KEY 
+}}
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v2
+
+      - name: 'Setup Terraform'
+        uses: hashicorp/setup-terraform@v1
+
+      - name: 'Terraform Init'
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: 'Terraform Validate'
+        run: terraform validate
+        working-directory: ./terraform
+
+      - name: 'Terraform Plan'
+        run: terraform plan
+        working-directory: ./terraform
+
+      - name: 'Terraform Apply'
+        run: terraform apply -auto-approve
+        working-directory: ./terraform
+
